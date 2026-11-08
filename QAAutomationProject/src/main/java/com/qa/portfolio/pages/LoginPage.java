@@ -3,6 +3,7 @@ package com.qa.portfolio.pages;
 import java.time.Duration;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -42,7 +43,9 @@ public class LoginPage {
 
     public void logout() {
         wait.until(ExpectedConditions.elementToBeClickable(sideMenuButton)).click();
-        wait.until(ExpectedConditions.elementToBeClickable(logoutLink)).click();
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        executor.executeScript("arguments[0].click();", wait.until(ExpectedConditions.elementToBeClickable(logoutLink)));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(usernameInput));
     }
 
     public boolean isOnInventoryPage() {
