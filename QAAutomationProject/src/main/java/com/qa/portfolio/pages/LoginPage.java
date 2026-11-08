@@ -17,6 +17,8 @@ public class LoginPage {
     private final By passwordInput = By.id("password");
     private final By loginButton = By.id("login-button");
     private final By errorMessage = By.cssSelector("[data-test='error']");
+    private final By sideMenuButton = By.id("react-burger-menu-btn");
+    private final By logoutLink = By.id("logout_sidebar_link");
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;
@@ -36,6 +38,11 @@ public class LoginPage {
 
     public String getErrorMessage() {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(errorMessage)).getText();
+    }
+
+    public void logout() {
+        wait.until(ExpectedConditions.elementToBeClickable(sideMenuButton)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(logoutLink)).click();
     }
 
     public boolean isOnInventoryPage() {

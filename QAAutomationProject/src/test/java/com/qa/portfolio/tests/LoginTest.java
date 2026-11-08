@@ -33,4 +33,26 @@ public class LoginTest extends BaseTest {
 
         Assert.assertTrue(loginPage.getErrorMessage().contains("locked out"));
     }
+
+    @Test
+    public void emptyCredentials() {
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.open();
+        loginPage.loginAs("", "");
+
+        Assert.assertTrue(loginPage.getErrorMessage().contains("Username is required"));
+    }
+
+    @Test
+    public void logoutTest() {
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.open();
+        loginPage.loginAs("standard_user", "secret_sauce");
+
+        Assert.assertTrue(loginPage.isOnInventoryPage(), "Expected successful login to open inventory page");
+
+        loginPage.logout();
+
+        Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/");
+    }
 }
