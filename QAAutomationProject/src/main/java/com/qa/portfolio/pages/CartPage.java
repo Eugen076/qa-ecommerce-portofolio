@@ -4,7 +4,9 @@ import java.time.Duration;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -18,7 +20,7 @@ public class CartPage {
     private final By itemTitle = By.cssSelector("[data-test='inventory-item-name']");
     private final By itemPrice = By.cssSelector("[data-test='inventory-item-price']");
     private final By continueShoppingButton = By.cssSelector("[data-test='continue-shopping']");
-    private final By checkoutButton = By.cssSelector("[data-test='checkout']");
+    private final By checkoutButton = By.id("checkout");
 
     public CartPage(WebDriver driver) {
         this.driver = driver;
@@ -55,8 +57,17 @@ public class CartPage {
     }
 
     public void clickCheckout() {
-        wait.until(ExpectedConditions.elementToBeClickable(checkoutButton)).click();
-        wait.until(ExpectedConditions.urlContains("checkout-step-one.html"));
+        WebElement button = wait.until(ExpectedConditions.elementToBeClickable(checkoutButton));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block:'center'});", button);
+        button.click();
+        try {
+            new WebDriverWait(driver, Duration.ofSeconds(5))
+                    .until(ExpectedConditions.urlContains("checkout-step-one.html"));
+        } catch (TimeoutException ignored) {
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();",
+                    driver.findElement(checkoutButton));
+            wait.until(ExpectedConditions.urlContains("checkout-step-one.html"));
+        }
     }
 
     private WebElement findItemByName(String productName) {
