@@ -19,7 +19,7 @@ public class BaseTest {
     public void setUp() {
         ChromeOptions options = new ChromeOptions();
         if (Boolean.getBoolean("headless")) {
-            options.addArguments("--headless=new");
+            options.addArguments("--headless=new", "--window-size=1920,1080", "--no-sandbox", "--disable-dev-shm-usage");
         }
 
         driver = new ChromeDriver(options);
