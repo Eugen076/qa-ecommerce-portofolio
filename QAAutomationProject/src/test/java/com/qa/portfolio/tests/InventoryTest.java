@@ -9,21 +9,21 @@ import org.testng.annotations.Test;
 
 public class InventoryTest extends BaseTest {
 
-    @BeforeMethod
+    @BeforeMethod(groups = "ui")
     public void loginToInventory() {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.open();
         loginPage.loginAs("standard_user", "secret_sauce");
     }
 
-    @Test
+    @Test(groups = "ui")
     public void verifyInventoryPageTitle() {
         InventoryPage inventoryPage = new InventoryPage(driver);
 
         Assert.assertEquals(inventoryPage.getPageTitle(), "Products");
     }
 
-    @Test
+    @Test(groups = "ui")
     public void addSingleItemToCart() {
         InventoryPage inventoryPage = new InventoryPage(driver);
         inventoryPage.addBackpackToCart();
@@ -31,7 +31,7 @@ public class InventoryTest extends BaseTest {
         Assert.assertEquals(inventoryPage.getCartBadgeCount(), "1");
     }
 
-    @Test
+    @Test(groups = "ui")
     public void removeItemFromCart() {
         InventoryPage inventoryPage = new InventoryPage(driver);
         inventoryPage.addBackpackToCart();

@@ -12,7 +12,7 @@ public class CheckoutTest extends BaseTest {
 
     private static final String BACKPACK = "Sauce Labs Backpack";
 
-    @Test
+    @Test(groups = "ui")
     public void successfulCheckout() {
         LoginPage loginPage = loginAsStandardUser();
         Assert.assertTrue(loginPage.isOnInventoryPage(), "Login should navigate to inventory");
@@ -44,7 +44,7 @@ public class CheckoutTest extends BaseTest {
         Assert.assertEquals(checkoutPage.getCompleteHeaderText(), "Thank you for your order!");
     }
 
-    @Test
+    @Test(groups = "ui")
     public void checkoutRequiresPostalCode() {
         LoginPage loginPage = loginAsStandardUser();
         Assert.assertTrue(loginPage.isOnInventoryPage(), "Login should navigate to inventory");
@@ -64,7 +64,7 @@ public class CheckoutTest extends BaseTest {
                 "Invalid shipping information should keep the user on step one");
     }
 
-    @Test
+    @Test(groups = "ui")
     public void cancelCheckoutReturnsToCart() {
         LoginPage loginPage = loginAsStandardUser();
         Assert.assertTrue(loginPage.isOnInventoryPage(), "Login should navigate to inventory");

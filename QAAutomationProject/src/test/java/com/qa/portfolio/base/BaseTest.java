@@ -15,7 +15,7 @@ public class BaseTest {
 
     protected WebDriver driver;
 
-    @BeforeMethod
+    @BeforeMethod(groups = "ui")
     public void setUp() {
         ChromeOptions options = new ChromeOptions();
         boolean headless = Boolean.getBoolean("headless");
@@ -29,7 +29,7 @@ public class BaseTest {
         }
     }
 
-    @AfterMethod(alwaysRun = true)
+    @AfterMethod(alwaysRun = true, groups = "ui")
     public void tearDown(ITestResult testResult) {
         if (driver != null) {
             try {

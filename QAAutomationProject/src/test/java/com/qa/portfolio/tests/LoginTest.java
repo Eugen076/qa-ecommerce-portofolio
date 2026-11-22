@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 public class LoginTest extends BaseTest {
 
-    @Test
+    @Test(groups = "ui")
     public void validLogin() {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.open();
@@ -16,7 +16,7 @@ public class LoginTest extends BaseTest {
         Assert.assertTrue(loginPage.isOnInventoryPage(), "Expected successful login to open inventory page");
     }
 
-    @Test
+    @Test(groups = "ui")
     public void invalidLogin() {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.open();
@@ -25,7 +25,7 @@ public class LoginTest extends BaseTest {
         Assert.assertTrue(loginPage.getErrorMessage().contains("do not match"));
     }
 
-    @Test
+    @Test(groups = "ui")
     public void lockedOutUser() {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.open();
@@ -34,7 +34,7 @@ public class LoginTest extends BaseTest {
         Assert.assertTrue(loginPage.getErrorMessage().contains("locked out"));
     }
 
-    @Test
+    @Test(groups = "ui")
     public void emptyCredentials() {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.open();
@@ -43,7 +43,7 @@ public class LoginTest extends BaseTest {
         Assert.assertTrue(loginPage.getErrorMessage().contains("Username is required"));
     }
 
-    @Test
+    @Test(groups = "ui")
     public void logoutTest() {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.open();
