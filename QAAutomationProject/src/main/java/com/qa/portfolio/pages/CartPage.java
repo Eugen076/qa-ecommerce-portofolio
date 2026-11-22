@@ -4,13 +4,13 @@ import java.time.Duration;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.qa.portfolio.utils.PageActions;
 
 public class CartPage {
 
@@ -57,17 +57,7 @@ public class CartPage {
     }
 
     public void clickCheckout() {
-        WebElement button = wait.until(ExpectedConditions.elementToBeClickable(checkoutButton));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block:'center'});", button);
-        button.click();
-        try {
-            new WebDriverWait(driver, Duration.ofSeconds(5))
-                    .until(ExpectedConditions.urlContains("checkout-step-one.html"));
-        } catch (TimeoutException ignored) {
-            ((JavascriptExecutor) driver).executeScript("arguments[0].click();",
-                    driver.findElement(checkoutButton));
-            wait.until(ExpectedConditions.urlContains("checkout-step-one.html"));
-        }
+        PageActions.clickAndWait(driver, checkoutButton, ExpectedConditions.urlContains("checkout-step-one.html"));
     }
 
     private WebElement findItemByName(String productName) {

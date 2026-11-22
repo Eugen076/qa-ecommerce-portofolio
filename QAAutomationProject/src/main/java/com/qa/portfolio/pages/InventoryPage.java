@@ -7,6 +7,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.qa.portfolio.utils.PageActions;
+
 public class InventoryPage {
 
     private final WebDriver driver;
@@ -27,7 +29,9 @@ public class InventoryPage {
     }
 
     public void addBackpackToCart() {
-        wait.until(ExpectedConditions.elementToBeClickable(addBackpackButton)).click();
+        PageActions.clickAndWait(driver, addBackpackButton, ExpectedConditions.and(
+                ExpectedConditions.visibilityOfElementLocated(removeBackpackButton),
+                ExpectedConditions.visibilityOfElementLocated(cartBadge)));
     }
 
     public void removeBackpackFromCart() {

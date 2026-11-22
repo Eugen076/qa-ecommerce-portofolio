@@ -18,6 +18,10 @@ QA portfolio for the SauceDemo e-commerce application, with Selenium/TestNG UI r
 ├── .github/workflows/ci.yml
 ├── QAAutomationProject/
 │   ├── pom.xml
+│   ├── sql/
+│   │   ├── schema.sql
+│   │   ├── seed-data.sql
+│   │   └── queries.sql
 │   ├── src/
 │   │   ├── main/java/com/qa/portfolio/
 │   │   │   ├── pages/
@@ -39,7 +43,8 @@ QA portfolio for the SauceDemo e-commerce application, with Selenium/TestNG UI r
 │       ├── bug-reports/
 │       ├── test-cases/
 │       ├── test-plan/
-│       └── test-execution-report.md
+│       ├── test-execution-report.md
+│       └── sql-validation.md
 └── README.md
 ```
 
@@ -77,11 +82,12 @@ Run only Selenium UI tests with `mvn -B test -Dgroups=ui`; plain `mvn test` runs
 - [Bug report template](QAAutomationProject/docs/bug-reports/bug-report-template.md)
 - [Verified bug reports](QAAutomationProject/docs/bug-reports/)
 - [API test cases](QAAutomationProject/docs/test-cases/api-test-cases.md)
+- [SQL validation practice](QAAutomationProject/docs/sql-validation.md)
 
 ## Continuous Integration
 
 The **Tests** GitHub Actions workflow runs on pushes to `main` and can also be started manually from the repository's **Actions** tab. It runs `mvn -B test -Dheadless=true` on Ubuntu with Java 21. Download the `test-reports-and-screenshots` artifact from a workflow run to view Surefire reports and any failure screenshots. Pull requests do not currently trigger the workflow.
 
-## Roadmap
+## SQL practice
 
-- SQL testing
+The SQLite scripts provide manual QA exercises for validating e-commerce users, products, orders, and order items. They are practice queries, not automated tests. See [the SQL scripts](QAAutomationProject/sql/) and [validation scenarios with observed results](QAAutomationProject/docs/sql-validation.md).
